@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:controls1="using:ABI.Microsoft.UI.Xaml.Controls"
+             x:Class="EncryptingAndDecryptingMobileApp.EncryptPage"
+             Title="EncryptPage">
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
+        
+        <Label Text="Write Your Text" FontAttributes="Bold" />
+
+        <Entry x:Name="TextInputEntry" Placeholder="Enter Text Here" />
+
+        <Picker x:Name="EncryptMethodPicker"/>
+
+        <HorizontalStackLayout>
+            <Label Text="Write shift (for Caesar method)" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Margin="5"/>
+
+            <Entry x:Name="CaesarShiftInputEntry" 
+                   Placeholder="Enter shift Here" 
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <Button x:Name="AesKeyGeneratorButton"
+                Text="Generate key (Aes method)"
+                Clicked="AesKeyGeneratorButton_OnClicked"
+                VerticalOptions="Center"
+                Margin="5"/>
+
+        <Label Text="Key for Aes method:" 
+               FontAttributes="Bold" 
+               VerticalOptions="Center"
+               Margin="5"/>
+
+        <Label  x:Name="AesKeyOutputLabel"
+                    FontAttributes="Italic"
+                    TextColor="Black"
+                    VerticalOptions="Center"/>
+
+        <Button x:Name="EncryptButton"
+                Text="Encrypt"
+                Clicked="EncryptBtnClicked"
+                HorizontalOptions="Center"/>
+
+        <Label Text="Encrypted text" FontAttributes="Bold" />
+
+        <Label  x:Name="EncryptedOutputLabel"
+                FontAttributes="Italic"
+                TextColor="Black"
+                VerticalOptions="End"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button x:Name="UploadFileButton"
+                    Text="Upload file"
+                    Clicked="UploadFileButton_Clicked"
+                    Margin="5"/>
+
+            <Button x:Name="SaveToFileButton"
+                    Text="Save file"
+                    Clicked="SaveToFileButton_Clicked"
+                    Margin="5"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

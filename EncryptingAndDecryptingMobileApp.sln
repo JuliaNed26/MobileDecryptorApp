@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptingAndDecryptingMobileApp", "EncryptingAndDecryptingMobileApp\EncryptingAndDecryptingMobileApp.csproj", "{AB8E7838-407B-42D4-96F1-B1FD20EB4885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionLib", "EncryptionLib\EncryptionLib.csproj", "{DBC17401-D098-4ED4-A3D2-FCF021E90904}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8E7838-407B-42D4-96F1-B1FD20EB4885}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DBC17401-D098-4ED4-A3D2-FCF021E90904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC17401-D098-4ED4-A3D2-FCF021E90904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC17401-D098-4ED4-A3D2-FCF021E90904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC17401-D098-4ED4-A3D2-FCF021E90904}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal
