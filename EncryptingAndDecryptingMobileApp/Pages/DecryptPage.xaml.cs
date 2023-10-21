@@ -1,6 +1,10 @@
 using System.Text;
 using CommunityToolkit.Maui.Storage;
+using EncryptingAndDecryptingMobileApp.FrequencyHistogram;
 using EncryptionLib;
+using Microcharts.Maui;
+using static System.Net.Mime.MediaTypeNames;
+using Application = Microsoft.Maui.Controls.Application;
 
 namespace EncryptingAndDecryptingMobileApp;
 
@@ -20,8 +24,10 @@ public partial class DecryptPage : ContentPage
 	private void DecryptBtnClicked(object sender, EventArgs e)
 	{
 		var i = 0;
-		var textToEncrypt = TextInputEntry.Text;
+		var textToDecrypt = TextInputEntry.Text;
 		var encryptionMethod = DecryptMethodPicker.SelectedItem;
+
+		BuildChart();
 
 		switch (encryptionMethod.ToString())
 		{
@@ -35,6 +41,13 @@ public partial class DecryptPage : ContentPage
 				throw new InvalidOperationException("Do not have such encrypting method");
 		}
 
+		void BuildChart()
+		{
+			var builder = new ChartBuilder();
+			builder.FillEntriesUsingText(textToDecrypt);
+			chartView.Chart = builder.Build();
+		}
+
 		void CaesarDecrypt()
 		{
 			if (!int.TryParse(CaesarShiftInputEntry.Text, out var shift))
@@ -44,7 +57,7 @@ public partial class DecryptPage : ContentPage
 			else
 			{
 				var caesarEncryptor = new CaesarEncryptStrategy(shift);
-				DecryptedOutputLabel.Text = caesarEncryptor.Decrypt(textToEncrypt);
+				DecryptedOutputEntry.Text = caesarEncryptor.Decrypt(textToDecrypt);
 			}
 		}
 
@@ -53,7 +66,7 @@ public partial class DecryptPage : ContentPage
 			try
 			{
 				var aesEncryptor = new AesEncryptStrategy(AesKeyInputEntry.Text);
-				DecryptedOutputLabel.Text = aesEncryptor.Decrypt(textToEncrypt);
+				DecryptedOutputEntry.Text = aesEncryptor.Decrypt(textToDecrypt);
 			}
 			catch (Exception exception)
 			{
@@ -116,7 +129,7 @@ public partial class DecryptPage : ContentPage
 
 	private void FillInfoFromFileText(string fileText)
 	{
-		DecryptedOutputLabel.Text = string.Empty;
+		DecryptedOutputEntry.Text = string.Empty;
 
 		var encryptionInfo = EncryptorInfoParser.ParseDecryptionInfo(fileText);
 
@@ -144,7 +157,7 @@ public partial class DecryptPage : ContentPage
 		var method = $"{DecryptMethodPicker.SelectedItem}";
 		var shift = $"{CaesarShiftInputEntry.Text}";
 		var key = $"{AesKeyInputEntry.Text}";
-		var decryptedText = $"{DecryptedOutputLabel.Text}";
+		var decryptedText = $"{DecryptedOutputEntry.Text}";
 
 		MemoryStream stream = new MemoryStream();
 		stream.Write(Encoding.Default.GetBytes($"Method: {method}\n"));
@@ -154,5 +167,13 @@ public partial class DecryptPage : ContentPage
 			: $"Key: {key}\n"));
 		stream.Write(Encoding.Default.GetBytes($"Decrypted text: '{decryptedText}'"));
 		return stream;
+	}
+
+	private void OnEntryTapped(object sender, TappedEventArgs e)
+	{
+		if (sender is Entry entry)
+		{
+			Clipboard.SetTextAsync(entry.Text);
+		}
 	}
 }

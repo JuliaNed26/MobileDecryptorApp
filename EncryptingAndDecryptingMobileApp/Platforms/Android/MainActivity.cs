@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Microcharts.Maui;
+using Microsoft.Maui.Controls.Compatibility;
 
 namespace EncryptingAndDecryptingMobileApp;
 

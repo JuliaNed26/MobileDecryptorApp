@@ -2,6 +2,8 @@ using EncryptionLib;
 using System.IO;
 using System.Text;
 using CommunityToolkit.Maui.Storage;
+using EncryptingAndDecryptingMobileApp.FrequencyHistogram;
+using Microcharts.Maui;
 
 namespace EncryptingAndDecryptingMobileApp;
 
@@ -26,6 +28,8 @@ public partial class EncryptPage : ContentPage
         var textToEncrypt = TextInputEntry.Text;
         var encryptionMethod = EncryptMethodPicker.SelectedItem;
 
+		BuildChart();
+
         switch (encryptionMethod.ToString())
         {
             case "Caesar":
@@ -38,6 +42,13 @@ public partial class EncryptPage : ContentPage
 	            throw new InvalidOperationException("Do not have such encrypting method");
 		}
 
+        void BuildChart()
+        {
+	        var builder = new ChartBuilder();
+			builder.FillEntriesUsingText(textToEncrypt);
+			ChartView.Chart = builder.Build();
+        }
+
         void EncryptCaesar()
 		{
 			if (!int.TryParse(CaesarShiftInputEntry.Text, out var shift))
@@ -47,27 +58,27 @@ public partial class EncryptPage : ContentPage
 			else
 			{
 				var caesarEncryptor = new CaesarEncryptStrategy(shift);
-				EncryptedOutputLabel.Text = caesarEncryptor.Encrypt(textToEncrypt);
+				EncryptedOutputEntry.Text = caesarEncryptor.Encrypt(textToEncrypt);
 			}
 		}
 
         void EncryptAes()
 		{
-			if (string.IsNullOrEmpty(AesKeyOutputLabel.Text))
+			if (string.IsNullOrEmpty(AesKeyOutputEntry.Text))
 			{
 				ShowErrorMessage("Press button to create key for aes method");
 			}
 			else
 			{
-				var aesEncryptor = new AesEncryptStrategy(AesKeyOutputLabel.Text);
-				EncryptedOutputLabel.Text = aesEncryptor.Encrypt(textToEncrypt);
+				var aesEncryptor = new AesEncryptStrategy(AesKeyOutputEntry.Text);
+				EncryptedOutputEntry.Text = aesEncryptor.Encrypt(textToEncrypt);
 			}
 		}
     }
 
     private void AesKeyGeneratorButton_OnClicked(object sender, EventArgs e)
     {
-	    AesKeyOutputLabel.Text = AesEncryptStrategy.GenerateKey();
+	    AesKeyOutputEntry.Text = AesEncryptStrategy.GenerateKey();
     }
 
     private async void UploadFileButton_Clicked(object sender, EventArgs e)
@@ -122,7 +133,7 @@ public partial class EncryptPage : ContentPage
 
     private void FillInfoFromFileText(string fileText)
     {
-		EncryptedOutputLabel.Text = string.Empty;
+		EncryptedOutputEntry.Text = string.Empty;
 
 		var encryptionInfo = EncryptorInfoParser.ParseEncryptionInfo(fileText);
 
@@ -142,8 +153,8 @@ public partial class EncryptPage : ContentPage
     {
 	    var method = $"{EncryptMethodPicker.SelectedItem}";
 	    var shift = $"{CaesarShiftInputEntry.Text}";
-	    var key = $"{AesKeyOutputLabel.Text}";
-	    var encryptedText = $"{EncryptedOutputLabel.Text}";
+	    var key = $"{AesKeyOutputEntry.Text}";
+	    var encryptedText = $"{EncryptedOutputEntry.Text}";
 
 	    MemoryStream stream = new MemoryStream();
 	    stream.Write(Encoding.Default.GetBytes($"Method: {method}\n"));

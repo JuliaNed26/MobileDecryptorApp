@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:controls1="using:ABI.Microsoft.UI.Xaml.Controls"
+             xmlns:microchartsMaui="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="EncryptingAndDecryptingMobileApp.DecryptPage"
              Title="DecryptPage">
+    <ScrollView>
     <VerticalStackLayout
         Spacing="25"
         Padding="30,0"
@@ -34,11 +36,12 @@
 
         <Label Text="Decrypted text" FontAttributes="Bold" />
 
-        <Entry x:Name="DecryptedOutputLabel" 
+            <Entry x:Name="DecryptedOutputEntry" 
                FontAttributes="Italic"
                TextColor="Black"
-               VerticalOptions="End"
-               IsEnabled="False"/>
+               VerticalOptions="End"/>
+
+            <microchartsMaui:ChartView x:Name="chartView" WidthRequest="400" HeightRequest="400"/>
 
         <HorizontalStackLayout HorizontalOptions="Center">
             <Button x:Name="UploadFileButton"
@@ -52,4 +55,5 @@
                     Margin="5"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

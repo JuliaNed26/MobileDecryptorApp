@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
+using Microcharts.Maui;
 
 namespace EncryptingAndDecryptingMobileApp;
 
@@ -9,6 +10,7 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder
+			.UseMicrocharts()
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
