@@ -33,6 +33,12 @@
                 Clicked="OpenDecryptPage"
                 HorizontalOptions="Center" />
 
+            <Button
+                x:Name="AuthorsImageBtn"
+                Text="Authors info"
+                Clicked="OpenAuthorsInfoPage"
+                HorizontalOptions="Center" />
+
 
         </VerticalStackLayout>
     </ScrollView>

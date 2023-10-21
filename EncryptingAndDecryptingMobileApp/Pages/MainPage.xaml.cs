@@ -21,5 +21,10 @@ public partial class MainPage : ContentPage
 	{
 		await Navigation.PushAsync(new DecryptPage(_fileSaver));
 	}
+
+    private async void OpenAuthorsInfoPage(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new AuthorInfoPage());
+	}
 }
 
